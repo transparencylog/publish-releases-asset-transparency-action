@@ -1,0 +1,14 @@
+# action.yml
+name: 'GitHub Releases Asset Transparency Verify'
+description: 'Verify assets in a GitHub release against the Asset Transparency Log'
+outputs:
+  verified: 
+    description: 'List of verified URLs'
+  failed: 
+    description: 'List of failed URLs'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+    icon: 'download-cloud'  
+    color: 'green'
