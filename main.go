@@ -30,17 +30,20 @@ func main() {
 	e := github.ReleaseEvent{}
 	json.Unmarshal(b, &e)
 
+	var verified []string
+
 	for _, v := range e.Release.Assets {
-		println(*v.BrowserDownloadURL)
+		verified = append(verified, *v.BrowserDownloadURL)
 	}
-	println(*e.Release.ZipballURL)
-	println(*e.Release.TarballURL)
+	verified = append(verified, *e.Release.ZipballURL)
+	verified = append(verified, *e.Release.TarballURL)
 
 	archives := archiveURLs(*e.Repo.Owner.Login, *e.Repo.Name, *e.Release.TagName)
 	for _, v := range archives {
-		println(v)
+		verified = append(verified, v)
 	}
 
+	fmt.Printf("::set-output name=verified::%v\n", verified)
 }
 
 // archiveURLs generates source archive URLs for a GitHub repo tag
