@@ -27,10 +27,3 @@ The list of URLs that failed to match the asset logs digest
 ## Example Workflow
 
 [See example workflow](https://github.com/transparencylog/github-releases-asset-transparency-verify-action/blob/main/.github/workflows/asset-transparency.yaml)
-
-### API Docs Used
-
-- https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-- https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
-- https://docs.github.com/en/actions/reference/events-that-trigger-workflows#release
-- https://pkg.go.dev/github.com/google/go-github/v32/github?tab=doc#ReleaseEvent
