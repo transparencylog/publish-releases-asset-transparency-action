@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -50,14 +51,24 @@ func main() {
 		assets = append(assets, v)
 	}
 
+	var failed []string
+	var verified []string
 	for _, v := range assets {
-		get(v)
+		err := get(v)
+		if err != nil {
+			fmt.Printf("%s: failed: %v", v, err)
+			failed = append(failed, v)
+			continue
+		}
+
+		verified = append(verified, v)
 	}
 
-	fmt.Printf("::set-output name=verified::%v\n", assets)
+	fmt.Printf("::set-output name=verified::%v\n", verified)
+	fmt.Printf("::set-output name=failed::%v\n", failed)
 }
 
-func get(durl string) {
+func get(durl string) error {
 	u, err := url.Parse(durl)
 	if err != nil {
 		panic(err)
@@ -69,8 +80,7 @@ func get(durl string) {
 	// create download request
 	req, err := grab.NewRequest("", durl)
 	if err != nil {
-		fmt.Printf("failed to create grab request: %v\n", err)
-		os.Exit(1)
+		return errors.New("failed to request URL")
 	}
 	req.NoCreateDirectories = true
 	req.SkipExisting = true
@@ -98,7 +108,7 @@ func get(durl string) {
 		client := sumdb.NewClient(cache)
 		_, data, err := client.LookupOpts(key, sumdb.LookupOpts{Digest: want})
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 		fmt.Printf("fetched note: %s/lookup/%s\n", config.ServerURL, key)
 
@@ -107,7 +117,7 @@ func get(durl string) {
 				break
 			}
 			if strings.HasPrefix(line, "h1:") {
-				log.Fatalf("file digest %x != log digest %x", fileSum, line)
+				return errors.New("digest mismatch")
 			}
 		}
 
@@ -121,11 +131,10 @@ func get(durl string) {
 	// download and validate file
 	resp := grab.DefaultClient.Do(req)
 	if err := resp.Err(); err != nil {
-		fmt.Printf("Failed to grab: %v\n", err)
-		os.Exit(1)
+		return err
 	}
 
-	fmt.Println("Download validated and saved to", resp.Filename)
+	return nil
 }
 
 // archiveURLs generates source archive URLs for a GitHub repo tag
