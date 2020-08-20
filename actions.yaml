@@ -1,6 +1,7 @@
-# action.yml
-name: 'GitHub Releases Asset Transparency Verify'
+name: 'Publish Release Assets to Asset Transparency Log'
+
 description: 'Verify assets in a GitHub release against the Asset Transparency Log'
+
 outputs:
   verified: 
     description: 'List of verified URLs'
