@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Publish to Asset Transparency
       id: asset-transparency
-      uses: transparencylog/github-releases-asset-transparency-verify-action@v2
+      uses: transparencylog/github-releases-asset-transparency-verify-action@v3
     # Use the output from the `hello` step
     - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      run: echo "Verified URLs ${{ steps.asset-transparency.outputs.verified }}"
