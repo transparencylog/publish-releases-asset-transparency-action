@@ -1,3 +1,5 @@
+name: Publish Release Assets to Asset Transparency Log
+
 on:
   release:
     types: [published, created, edited, released]
@@ -5,7 +7,7 @@ on:
 jobs:
   github_release_asset_transparency_log_publish_job:
     runs-on: ubuntu-latest
-    name: Publish asset digests to https://beta-asset.transparencylog.net
+    name: Publish GitHub release asset digests to https://beta-asset.transparencylog.net
     steps:
     - name: Gather URLs from GitHub release and publish
       id: asset-transparency

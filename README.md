@@ -12,13 +12,13 @@ This action is designed to trigger on GitHub Release events and adds the release
 
 The list of verified URLs
 
-### `verified`
+### `failed`
 
 The list of URLs that failed to match the asset logs digest
 
-## Example usage
+## Example Workflow
 
-uses: actions/hello-world-docker-action@v4
+[See example workflow](https://github.com/transparencylog/github-releases-asset-transparency-verify-action/blob/main/.github/workflows/asset-transparency.yaml)
 
 ### API Docs Used
 
