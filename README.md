@@ -1,4 +1,4 @@
-# GitHub Action for Releases into Asset Transparency Log
+# Action to Publish and Verify Release Assets into Asset Transparency Log
 
 This action is designed to trigger on GitHub Release events and adds the release assets (including GitHub generated source tarballs) to the [Asset Transparency Log](https://www.transparencylog.com).
 
