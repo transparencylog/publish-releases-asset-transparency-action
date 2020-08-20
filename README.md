@@ -6,7 +6,7 @@ You or your users can then later verify GitHub is delivering the correct content
 
 Encouraging your users to Asset Transparency log clients, like tl, provides an additional protection to your users against attacks that might modify release binaries or source code (e.g. GitHub account compromise, man in the middle, etc)
 
-If you aren't familiar with release assets they are this section on a GitHub release page it is the page that looks like this:
+If you aren't familiar with release assets they are this section on a GitHub release page:
 
 ![screenshot of https://github.com/transparencylog/tl/releases/tag/v0.2.10](Documentation/images/github-release-assets.png)
 
