@@ -66,6 +66,11 @@ func main() {
 
 	fmt.Printf("::set-output name=verified::%v\n", verified)
 	fmt.Printf("::set-output name=failed::%v\n", failed)
+
+	// Signal GitHub actions that this job should fail
+	if len(failed) > 0 {
+		os.Exit(1)
+	}
 }
 
 func get(durl string) error {
