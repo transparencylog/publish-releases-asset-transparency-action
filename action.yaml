@@ -2,11 +2,18 @@ name: 'Publish Release Assets to Asset Transparency Log'
 
 description: 'Verify assets in a GitHub release against the Asset Transparency Log'
 
+inputs:
+  additionalURLs:
+    description: 'Additional URLs to verify for this release (space separated)'
+    required: false
+    default: ''
+
 outputs:
   verified: 
     description: 'List of verified URLs'
   failed: 
     description: 'List of failed URLs'
+
 runs:
   using: 'docker'
   image: 'Dockerfile'

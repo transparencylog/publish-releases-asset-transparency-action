@@ -46,10 +46,8 @@ func main() {
 	assets = append(assets, *e.Release.ZipballURL)
 	assets = append(assets, *e.Release.TarballURL)
 
-	archives := archiveURLs(*e.Repo.Owner.Login, *e.Repo.Name, *e.Release.TagName)
-	for _, v := range archives {
-		assets = append(assets, v)
-	}
+	assets = append(assets, archiveURLs(*e.Repo.Owner.Login, *e.Repo.Name, *e.Release.TagName)...)
+	assets = append(assets, additionalURLs()...)
 
 	var failed []string
 	var verified []string
@@ -155,4 +153,12 @@ func archiveURLs(owner, repo, tag string) (urls []string) {
 	urls = append(urls, u.String()+".zip")
 
 	return
+}
+
+// additionalURLs parses inputs.additionalURLs and returns the []string list.
+//
+// https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#inputs
+func additionalURLs() (urls []string) {
+	l := os.Getenv("INPUT_ADDITIONALURLS")
+	return strings.Split(l, " ")
 }
