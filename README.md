@@ -12,7 +12,9 @@ If you aren't familiar with release assets they are this section on a GitHub rel
 
 ## Inputs
 
-**None**
+### `additionalURLs`
+
+**Optional** A space separated list of additional URLs that should be registered besides the the GitHub release assets. Default `""`.
 
 ## Outputs
 
